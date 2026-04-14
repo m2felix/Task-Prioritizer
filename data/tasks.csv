@@ -1,0 +1,31 @@
+Task,EstimatedHours,DeadlineDays,Category,CompletedOnTime
+Finish homework,2,1,School,1
+Study CS lecture,3,2,School,1
+Do assignment,4,1,School,0
+Watch Netflix,3,2,Leisure,0
+Go to gym,1,3,Health,1
+Clean room,1.5,1,Personal,0
+Study machine learning,4,5,School,1
+Do laundry,1,2,Personal,1
+Play video games,2,1,Leisure,0
+Prepare presentation,3,1,School,0
+Read book,2,4,Learning,1
+Cook dinner,1,1,Personal,1
+Write essay,3,2,School,1
+Scroll social media,2,1,Leisure,0
+Group project work,4,3,School,1
+Fix laptop issue,2,2,Personal,1
+Organize notes,1.5,3,School,1
+Sleep early,0.5,1,Health,1
+Procrastinate task,3,1,Leisure,0
+Study for exam,5,5,School,1
+Go shopping,2,2,Personal,1
+Workout session,1,1,Health,1
+Code practice,3,4,School,1
+Watch YouTube,2,1,Leisure,0
+Write project report,4,2,School,0
+Meditate,0.5,1,Health,1
+Attend lecture,2,1,School,1
+Clean desk,1,2,Personal,1
+Gaming session,3,1,Leisure,0
+Revise notes,2,3,School,1
