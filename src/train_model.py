@@ -28,4 +28,6 @@ print("Model accuracy:", accuracy)
 
 # Save model
 joblib.dump(model, "models/task_model.pkl")
+joblib.dump(list(X.columns), "models/feature_columns.pkl")
+
 print("Model saved successfully!")
