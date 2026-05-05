@@ -2,64 +2,80 @@ import pandas as pd
 import joblib
 
 
+# --------------------------------
+# Load model + vectorizer
+# --------------------------------
 
-# ----------------------------
-# Load trained model
-# ----------------------------
 model = joblib.load("models/task_model.pkl")
-feature_columns = joblib.load("models/feature_columns.pkl")
-
-# ----------------------------
-# New tasks to prioritize
-# ----------------------------
-tasks = pd.DataFrame([
-    {
-        "EstimatedHours": 2,
-        "DeadlineDays": 1,
-        "Category_Health": 0,
-        "Category_Leisure": 0,
-        "Category_Learning": 0,
-        "Category_Personal": 0,
-        "Category_School": 1
-    },
-
-    {
-        "EstimatedHours": 1,
-        "DeadlineDays": 3,
-        "Category_Health": 1,
-        "Category_Leisure": 0,
-        "Category_Learning": 0,
-        "Category_Personal": 0,
-        "Category_School": 0
-    },
-
-    {
-        "EstimatedHours": 3,
-        "DeadlineDays": 2,
-        "Category_Health": 0,
-        "Category_Leisure": 0,
-        "Category_Learning": 0,
-        "Category_Personal": 1,
-        "Category_School": 0
-    }
-])
-
-tasks = tasks.reindex(columns=feature_columns, fill_value=0)
-# ----------------------------
-# Predict priority probabilities
-# ----------------------------
-
-tasks["PriorityScore"] = model.predict_proba(tasks)[:,1]
+vectorizer = joblib.load("models/vectorizer.pkl")
 
 
-# ----------------------------
-# Rank highest priority first
-# ----------------------------
+# --------------------------------
+# INPUT
+# --------------------------------
 
-tasks = tasks.sort_values(
-    by="PriorityScore",
-    ascending=False
-)
+print("\nAI TASK PRIORITY SYSTEM (REAL NLP MODE)\n")
 
-print("\nRanked Tasks:\n")
-print(tasks)
+task_text = input("Enter your task: ")
+
+
+print("\nEstimated hours:")
+hours = float(input())
+
+print("Deadline days:")
+deadline = int(input())
+
+print("Difficulty (1-5):")
+difficulty = int(input())
+
+print("Energy level (1-5):")
+energy = int(input())
+
+print("Procrastination risk (1-5):")
+procrastination = int(input())
+
+
+# --------------------------------
+# NLP VECTOR
+# --------------------------------
+
+text_vec = vectorizer.transform([task_text])
+
+
+# --------------------------------
+# COMBINE WITH NUMERIC FEATURES
+# --------------------------------
+
+import numpy as np
+from scipy.sparse import hstack
+
+numeric = np.array([[hours, deadline, difficulty, energy, procrastination]])
+
+X = hstack([text_vec, numeric])
+
+
+# --------------------------------
+# PREDICT
+# --------------------------------
+
+score = model.predict_proba(X)[0][1]
+
+
+# --------------------------------
+# OUTPUT
+# --------------------------------
+
+print("\n========================")
+print("AI TASK PRIORITY RESULT")
+print("========================")
+
+print("Task:", task_text)
+print("Priority Score:", round(score, 2))
+
+
+if score > 0.8:
+    print("🚨 DO THIS NOW")
+elif score > 0.6:
+    print("⚡ IMPORTANT")
+else:
+    print("🕒 CAN WAIT")

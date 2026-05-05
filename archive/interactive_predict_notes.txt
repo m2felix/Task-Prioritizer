@@ -1,0 +1,391 @@
+========================================================
+INTERACTIVE_PREDICT.PY NOTES (Line-by-Line Understanding)
+========================================================
+
+Goal of this script:
+Turn the ML model into an interactive command-line tool
+where a user inputs a task and gets a priority score.
+
+Pipeline:
+
+Load Model
+→ Get User Input
+→ Build Feature Vector
+→ Align Features
+→ Predict Score
+→ Display Recommendation
+
+
+
+========================================================
+1) IMPORT LIBRARIES
+========================================================
+
+import pandas as pd
+
+- Used to create a DataFrame from user input.
+- Even for one task, model expects structured tabular data.
+
+
+----------------------------------------
+
+import joblib
+
+- Used to load saved model and feature schema.
+
+
+
+========================================================
+2) LOAD MODEL + FEATURE SCHEMA
+========================================================
+
+model = joblib.load("models/task_model.pkl")
+
+- Loads trained Random Forest model.
+- This model already learned patterns during training.
+
+
+----------------------------------------
+
+feature_columns = joblib.load(
+    "models/feature_columns.pkl"
+)
+
+- Loads list of feature names used during training.
+
+Why important?
+
+The model expects inputs:
+- same columns
+- same order
+
+This ensures consistency between training and prediction.
+
+
+
+========================================================
+3) USER INPUT (CLI INTERFACE)
+========================================================
+
+print("\nAI Task Prioritizer\n")
+
+- Displays title in terminal.
+
+
+----------------------------------------
+
+hours = float(input("Estimated hours for task: "))
+
+- User inputs task duration.
+- Converted to float because model expects numeric values.
+
+
+----------------------------------------
+
+deadline = int(input("Days until deadline: "))
+
+- User inputs urgency.
+- Lower = more urgent.
+
+
+----------------------------------------
+
+category = input(
+    "Category (School/Health/Personal/Leisure/Learning): "
+).strip().capitalize()
+
+- User inputs category as text.
+- .strip() removes extra spaces
+- .capitalize() ensures consistent format
+
+Example:
+
+"school" → "School"
+
+
+
+========================================================
+4) BUILD FEATURE DICTIONARY
+========================================================
+
+task = {
+    "EstimatedHours": hours,
+    "DeadlineDays": deadline,
+
+    "Category_Health": 0,
+    "Category_Leisure": 0,
+    "Category_Learning": 0,
+    "Category_Personal": 0,
+    "Category_School": 0
+}
+
+- Initializes all category values to 0.
+
+Why?
+
+Because of one-hot encoding used during training.
+
+
+----------------------------------------
+
+category_column = f"Category_{category}"
+
+- Dynamically builds correct column name.
+
+Example:
+
+Category = "School"
+→ "Category_School"
+
+
+
+----------------------------------------
+
+if category_column in task:
+    task[category_column] = 1
+
+- Sets correct category to 1.
+
+
+else:
+    print("Invalid category.")
+    exit()
+
+- Prevents invalid user input.
+
+
+
+========================================================
+5) CONVERT TO DATAFRAME
+========================================================
+
+task_df = pd.DataFrame([task])
+
+- Converts dictionary into DataFrame.
+
+Why list [task]?
+
+Because pandas expects a list of rows.
+
+Now format matches training data structure.
+
+
+
+========================================================
+6) ALIGN FEATURES WITH TRAINING
+========================================================
+
+task_df = task_df.reindex(
+    columns=feature_columns,
+    fill_value=0
+)
+
+- Ensures:
+  * same column order
+  * missing columns are added
+
+fill_value=0:
+- Any missing feature gets value 0.
+
+This prevents feature mismatch errors.
+
+
+This is a real-world ML pipeline step.
+
+
+
+========================================================
+7) PREDICT PROBABILITY
+========================================================
+
+score = model.predict_proba(task_df)[0][1]
+
+Breakdown:
+
+predict_proba() returns:
+
+[[prob_class_0, prob_class_1]]
+
+Example:
+
+[[0.12, 0.88]]
+
+Meaning:
+
+12% fail
+88% success
+
+
+----------------------------------------
+
+[0][1]
+
+[0] → first (and only) task
+[1] → probability of class "1"
+
+Class 1 = CompletedOnTime
+
+
+So:
+
+score = probability task will be completed on time
+
+
+
+========================================================
+8) DISPLAY RESULTS
+========================================================
+
+print("\nPriority Score:", round(score,2))
+
+- Shows probability rounded to 2 decimals.
+
+
+----------------------------------------
+
+if score > 0.85:
+    print("🔥 High priority — do this soon.")
+
+elif score > 0.65:
+    print("⚡ Medium priority.")
+
+else:
+    print("🕒 Lower priority.")
+
+- Converts numeric score into human-friendly advice.
+
+This is important:
+We are turning ML output into decision support.
+
+
+
+========================================================
+BIG PICTURE
+========================================================
+
+This script transforms the model into a usable tool.
+
+Before:
+- Model was just numbers and code
+
+Now:
+- User inputs task
+- Model gives recommendation
+
+This is the difference between:
+
+Machine Learning model
+vs
+AI-powered application
+
+
+
+========================================================
+KEY CONCEPTS I LEARNED
+========================================================
+
+Inference:
+- Using trained model on new data
+
+Feature Engineering:
+- Structuring inputs for model
+
+One-Hot Encoding:
+- Representing categories as binary values
+
+Probability Prediction:
+- Using predict_proba()
+
+CLI Interface:
+- Interacting with user via terminal
+
+Feature Alignment:
+- Matching training and prediction schema
+
+
+
+========================================================
+FLOW OF SCRIPT
+========================================================
+
+Load model
+
+Load feature schema
+
+Get user input
+
+Build feature vector
+
+Align features
+
+Predict probability
+
+Output priority score
+
+
+
+========================================================
+INTERVIEW EXPLANATION
+========================================================
+
+"I built an interactive CLI tool that takes task inputs,
+transforms them into model-compatible features,
+and uses a trained Random Forest model to predict
+completion likelihood. The system outputs a priority score
+and recommendation based on probability thresholds."
+
+
+
+========================================================
+WHY THIS IS IMPORTANT
+========================================================
+
+This is no longer just ML training.
+
+This is:
+
+- user interaction
+- real-time inference
+- decision support system
+
+Closer to real-world applications.
+
+
+
+========================================================
+FUTURE IMPROVEMENTS
+========================================================
+
+[ ] Allow multiple tasks input
+
+[ ] Rank multiple tasks
+
+[ ] Save user history
+
+[ ] Improve category handling
+
+[ ] Add more behavioral features
+
+[ ] Build web interface
+
+
+
+========================================================
+QUESTIONS TO UNDERSTAND
+========================================================
+
+Why use predict_proba instead of predict?
+
+Why do we reindex features?
+
+Why convert user input into DataFrame?
+
+What happens if feature order is wrong?
+
+Why map category manually?
+
+
+
+========================================================
+END NOTES
+========================================================

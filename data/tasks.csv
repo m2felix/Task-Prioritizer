@@ -1,31 +1,121 @@
-Task,EstimatedHours,DeadlineDays,Category,CompletedOnTime
-Finish homework,2,1,School,1
-Study CS lecture,3,2,School,1
-Do assignment,4,1,School,0
-Watch Netflix,3,2,Leisure,0
-Go to gym,1,3,Health,1
-Clean room,1.5,1,Personal,0
-Study machine learning,4,5,School,1
-Do laundry,1,2,Personal,1
-Play video games,2,1,Leisure,0
-Prepare presentation,3,1,School,0
-Read book,2,4,Learning,1
-Cook dinner,1,1,Personal,1
-Write essay,3,2,School,1
-Scroll social media,2,1,Leisure,0
-Group project work,4,3,School,1
-Fix laptop issue,2,2,Personal,1
-Organize notes,1.5,3,School,1
-Sleep early,0.5,1,Health,1
-Procrastinate task,3,1,Leisure,0
-Study for exam,5,5,School,1
-Go shopping,2,2,Personal,1
-Workout session,1,1,Health,1
-Code practice,3,4,School,1
-Watch YouTube,2,1,Leisure,0
-Write project report,4,2,School,0
-Meditate,0.5,1,Health,1
-Attend lecture,2,1,School,1
-Clean desk,1,2,Personal,1
-Gaming session,3,1,Leisure,0
-Revise notes,2,3,School,1
+TaskName,EstimatedHours,DeadlineDays,Difficulty,EnergyLevel,ProcrastinationRisk,Category,CompletedOnTime
+clean room,1.5,1,3,5,3,Personal,0
+organize desk,1,3,2,1,2,Personal,1
+study machine learning,5,5,3,5,2,School,1
+finish assignment,3,1,4,3,1,School,1
+play video games,2,1,5,5,5,Leisure,0
+review lecture notes,2,3,2,3,2,School,1
+work on group project,4,3,3,5,5,School,0
+review lecture notes,2,3,2,1,2,School,1
+go to gym,1,3,2,4,3,Health,1
+morning run,1,2,2,1,5,Health,0
+watch youtube,2,2,4,4,2,Leisure,1
+go to gym,1,3,2,5,3,Health,1
+watch netflix,3,2,5,2,1,Leisure,1
+study machine learning,5,5,3,3,4,School,1
+go to gym,1,3,2,2,2,Health,1
+study machine learning,5,5,3,4,2,School,1
+watch netflix,3,2,5,5,5,Leisure,0
+cram for exam,4,1,5,2,4,School,0
+go to gym,1,3,2,5,3,Health,1
+clean room,1.5,1,3,2,3,Personal,0
+work on group project,4,3,3,5,3,School,1
+review lecture notes,2,3,2,2,3,School,1
+cram for exam,4,1,5,2,3,School,0
+work on group project,4,3,3,4,5,School,0
+cram for exam,4,1,5,3,2,School,0
+cook meal,1,1,2,1,5,Health,0
+study machine learning,5,5,3,4,3,School,1
+read book,2,4,2,3,1,Learning,1
+watch youtube,2,2,4,1,1,Leisure,1
+learn python,3,5,3,3,4,Learning,1
+finish assignment,3,1,4,2,1,School,1
+learn python,3,5,3,4,3,Learning,1
+clean room,1.5,1,3,1,4,Personal,0
+watch netflix,3,2,5,5,3,Leisure,0
+morning run,1,2,2,2,3,Health,1
+review lecture notes,2,3,2,5,2,School,1
+study machine learning,5,5,3,1,1,School,1
+work on group project,4,3,3,3,2,School,1
+read book,2,4,2,3,5,Learning,1
+go to gym,1,3,2,2,2,Health,1
+cram for exam,4,1,5,5,2,School,0
+review lecture notes,2,3,2,5,3,School,1
+study machine learning,5,5,3,5,1,School,1
+read book,2,4,2,5,3,Learning,1
+do laundry,1,2,2,4,3,Personal,1
+cook meal,1,1,2,4,4,Health,0
+do laundry,1,2,2,3,1,Personal,1
+cram for exam,4,1,5,1,2,School,0
+read book,2,4,2,3,4,Learning,1
+learn python,3,5,3,5,1,Learning,1
+cook meal,1,1,2,3,3,Health,1
+work on group project,4,3,3,4,4,School,1
+play video games,2,1,5,3,1,Leisure,0
+watch youtube,2,2,4,2,5,Leisure,0
+cook meal,1,1,2,4,4,Health,0
+study machine learning,5,5,3,5,4,School,1
+do laundry,1,2,2,2,4,Personal,1
+finish assignment,3,1,4,3,4,School,0
+read book,2,4,2,5,2,Learning,1
+study machine learning,5,5,3,3,1,School,1
+clean room,1.5,1,3,4,2,Personal,1
+watch netflix,3,2,5,1,4,Leisure,0
+do laundry,1,2,2,1,1,Personal,1
+play video games,2,1,5,1,5,Leisure,0
+play video games,2,1,5,4,4,Leisure,0
+watch netflix,3,2,5,5,3,Leisure,0
+review lecture notes,2,3,2,2,2,School,1
+cram for exam,4,1,5,2,2,School,0
+watch youtube,2,2,4,4,2,Leisure,1
+learn python,3,5,3,3,1,Learning,1
+finish assignment,3,1,4,3,3,School,0
+work on group project,4,3,3,2,1,School,1
+practice coding,3,5,3,1,5,Learning,1
+review lecture notes,2,3,2,4,1,School,1
+watch netflix,3,2,5,3,3,Leisure,0
+do laundry,1,2,2,1,3,Personal,1
+study machine learning,5,5,3,4,3,School,1
+work on group project,4,3,3,5,1,School,1
+watch netflix,3,2,5,5,5,Leisure,0
+play video games,2,1,5,3,3,Leisure,0
+organize desk,1,3,2,3,5,Personal,1
+play video games,2,1,5,4,5,Leisure,0
+watch youtube,2,2,4,5,5,Leisure,0
+sleep early,0.5,1,2,5,4,Health,0
+play video games,2,1,5,3,5,Leisure,0
+review lecture notes,2,3,2,5,3,School,1
+sleep early,0.5,1,2,5,5,Health,0
+review lecture notes,2,3,2,4,1,School,1
+do laundry,1,2,2,4,2,Personal,1
+study machine learning,5,5,3,5,2,School,1
+clean room,1.5,1,3,5,1,Personal,1
+work on group project,4,3,3,5,5,School,0
+work on group project,4,3,3,1,4,School,1
+go to gym,1,3,2,4,4,Health,1
+study machine learning,5,5,3,3,4,School,1
+morning run,1,2,2,5,5,Health,0
+cook meal,1,1,2,5,2,Health,1
+cram for exam,4,1,5,3,2,School,0
+review lecture notes,2,3,2,1,4,School,1
+cram for exam,4,1,5,4,4,School,0
+work on group project,4,3,3,3,5,School,0
+cook meal,1,1,2,4,3,Health,1
+finish assignment,3,1,4,1,4,School,0
+watch netflix,3,2,5,1,3,Leisure,0
+study machine learning,5,5,3,2,4,School,1
+watch youtube,2,2,4,1,5,Leisure,0
+morning run,1,2,2,4,4,Health,1
+do laundry,1,2,2,5,1,Personal,1
+learn python,3,5,3,1,3,Learning,1
+organize desk,1,3,2,5,4,Personal,1
+review lecture notes,2,3,2,5,3,School,1
+sleep early,0.5,1,2,5,2,Health,1
+watch netflix,3,2,5,2,1,Leisure,1
+clean room,1.5,1,3,2,5,Personal,0
+organize desk,1,3,2,3,4,Personal,1
+finish assignment,3,1,4,1,3,School,0
+play video games,2,1,5,2,4,Leisure,0
+read book,2,4,2,3,5,Learning,1
+cram for exam,4,1,5,2,5,School,0
+review lecture notes,2,3,2,4,1,School,1
